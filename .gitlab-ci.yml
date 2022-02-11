@@ -1,0 +1,82 @@
+image: gitlab.digitalnatives.nl:4567/docker/gitlab-runner/test-php:72
+
+stages:
+  - install
+  - lint
+  - build
+  - test
+  - deploy
+
+cache: &global_cache
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - craft/vendor/
+  policy: pull
+
+composer_install:
+  stage: install
+  script:
+    - cd craft
+    - php composer.phar install -n
+  cache:
+    # inherit all global cache settings
+    <<: *global_cache
+    policy: pull-push
+  interruptible: true
+
+phplint:
+  stage: lint
+  script:
+    - cd craft
+    - php vendor/bin/parallel-lint -j 8 --no-progress --exclude vendor .
+  except:
+    - triggers
+  interruptible: true
+
+php_psr:
+  stage: lint
+  script:
+    - cd craft
+    - vendor/bin/phpcs *
+  except:
+    - triggers
+  interruptible: true
+
+security:
+  stage: test
+  image: gitlab.digitalnatives.nl:4567/docker/gitlab-runner/test-php:72
+  script:
+    - cd craft
+    - composer global require sensiolabs/security-checker
+    - security-checker security:check
+  only:
+    - schedules
+    - tags
+  interruptible: true
+
+#job_deploy_staging:
+#image: gitlab.digitalnatives.nl:4567/docker/gitlab-runner/php-node-builder:73
+#stage: deploy
+#environment:
+#name: staging
+#url: https://craft.acc.mars.digitalnatives.nl
+#script:
+#- php deployer.phar deploy staging -v --revision=$CI_COMMIT_SHA
+#only:
+#- staging
+#except:
+#- schedules
+
+#job_deploy_production:
+#image: gitlab.digitalnatives.nl:4567/docker/gitlab-runner/php-node-builder:73
+#stage: deploy
+#environment:
+#name: production
+#url: https://cultuurenondernemen.nl
+#script:
+#- php deployer.phar deploy production -v --revision=$CI_COMMIT_SHA
+#only:
+#- tags
+#except:
+#- staging
+#- schedules

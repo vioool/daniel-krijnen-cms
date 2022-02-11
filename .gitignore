@@ -1,0 +1,6 @@
+docker/data/mysql/
+web-access.log
+web-error.log
+.idea
+.network
+.DS_Store

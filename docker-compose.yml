@@ -1,0 +1,66 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx:1.17
+    expose:
+      - "80"
+      - "443"
+    volumes:
+      - ./docker/conf/nginx/:/etc/nginx/conf.d:rw,cached
+      - ./:/var/www/html:rw,cached
+      - "${EZDEV_PATH}/.docker/certs:/etc/nginx/conf.d/certs:ro,cached"
+    depends_on:
+      - redis
+      - mysql
+      - mail
+    links:
+      - php
+    environment:
+      # add your own hostname
+      - VIRTUAL_HOST=viola-craft.test
+      - VIRTUAL_PROTO=https
+      - VIRTUAL_PORT=443
+      - HTTPS_METHOD=noredirect # required for ngrok
+    labels:
+      nl.tsdme.tag: test
+      nl.digitalnatives.cert: generate
+
+  php:
+    build: ./docker/images/php
+    expose:
+      - "9000"
+    volumes:
+      - ./:/var/www/html:rw,cached
+    labels:
+      nl.tsdme.tag: test
+
+  mysql:
+    image: mysql:5.7
+    expose:
+      - "3306"
+    ports:
+      - "3306"
+    volumes:
+      - ./docker/data/mysql:/var/lib/mysql/:rw,delegated
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      # add your database name
+      MYSQL_DATABASE: craft
+    labels:
+      nl.tsdme.tag: test
+
+  redis:
+    image: redis:4
+    expose:
+      - "6379"
+    labels:
+      nl.tsdme.tag: test
+
+  mail:
+    image: mailhog/mailhog
+    expose:
+      - "1025"
+    ports:
+      - "8025"
+    labels:
+      nl.tsdme.tag: test

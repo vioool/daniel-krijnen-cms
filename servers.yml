@@ -1,0 +1,15 @@
+ceres_digitalnatives_nl:
+  hostname:      ceres.digitalnatives.nl
+  port:          22
+  user:          [projectname]_st
+  stage:         staging
+  deploy_path:   /home/[projectname]_st/[projectname].ceres.digitalnatives.nl/
+  branch:        staging
+  identity_file:
+    public_key:  ~/.ssh/id_rsa.pub
+    private_key: ~/.ssh/id_rsa
+    password:    null
+  sshOptions:
+    UserKnownHostsFile: /dev/null
+    StrictHostKeyChecking: no
+  fcgi_path:     127.0.0.1:9000

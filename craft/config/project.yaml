@@ -1,0 +1,74 @@
+dateModified: 1643984563
+email:
+  fromEmail: lars@digitalnatives.nl
+  fromName: 'Viola Craft'
+  transportType: craft\mail\transportadapters\Sendmail
+fieldGroups:
+  c7dce282-a835-4df4-b874-1795a69610bf:
+    name: Common
+graphql:
+  schemas:
+    199f4960-c722-492b-8aea-34560e8ee876:
+      isPublic: '1'
+      name: 'Public Schema'
+      scope:
+        - 'sections.190c7a23-7a7b-45fa-a748-83594375901d:read'
+        - 'entrytypes.0d46ca62-4834-4df7-b0a8-66bbe2ba8529:read'
+sections:
+  190c7a23-7a7b-45fa-a748-83594375901d:
+    enableVersioning: true
+    entryTypes:
+      0d46ca62-4834-4df7-b0a8-66bbe2ba8529:
+        handle: projecten
+        hasTitleField: true
+        name: Projecten
+        sortOrder: 1
+        titleFormat: null
+        titleLabel: Title
+    handle: projecten
+    name: Projecten
+    previewTargets:
+      -
+        __assoc__:
+          -
+            - label
+            - 'Primary entry page'
+          -
+            - urlFormat
+            - '{url}'
+          -
+            - refresh
+            - '1'
+    propagationMethod: all
+    siteSettings:
+      f31194a4-ceb4-447f-a479-acaaef372be2:
+        enabledByDefault: true
+        hasUrls: true
+        template: null
+        uriFormat: 'projecten/{slug}'
+    type: channel
+siteGroups:
+  6458b569-ed67-43a7-9910-f0d76924261b:
+    name: 'Viola Craft'
+sites:
+  f31194a4-ceb4-447f-a479-acaaef372be2:
+    baseUrl: $DEFAULT_SITE_URL
+    handle: default
+    hasUrls: true
+    language: en-US
+    name: 'Viola Craft'
+    primary: true
+    siteGroup: 6458b569-ed67-43a7-9910-f0d76924261b
+    sortOrder: 1
+system:
+  edition: pro
+  live: true
+  name: 'Viola Craft'
+  schemaVersion: 3.4.10
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: ''
+  photoVolumeUid: null
+  requireEmailVerification: true
