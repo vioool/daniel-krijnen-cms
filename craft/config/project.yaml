@@ -1,4 +1,4 @@
-dateModified: 1643984563
+dateModified: 1644614134
 email:
   fromEmail: lars@digitalnatives.nl
   fromName: 'Viola Craft'
@@ -47,6 +47,49 @@ sections:
         template: null
         uriFormat: 'projecten/{slug}'
     type: channel
+  a968b832-5626-4d6a-acfc-a6fd5f160f96:
+    enableVersioning: true
+    entryTypes:
+      86486a80-29b8-4500-8723-13b7815b5c8b:
+        handle: home
+        hasTitleField: false
+        name: Home
+        sortOrder: 1
+        titleFormat: '{section.name|raw}'
+        titleLabel: null
+    handle: home
+    name: Home
+    previewTargets:
+      -
+        __assoc__:
+          -
+            - label
+            - 'Primary entry page'
+          -
+            - urlFormat
+            - '{url}'
+          -
+            - refresh
+            - '1'
+      -
+        __assoc__:
+          -
+            - label
+            - Home
+          -
+            - urlFormat
+            - ''
+          -
+            - refresh
+            - '1'
+    propagationMethod: all
+    siteSettings:
+      f31194a4-ceb4-447f-a479-acaaef372be2:
+        enabledByDefault: true
+        hasUrls: true
+        template: null
+        uriFormat: __home__
+    type: single
 siteGroups:
   6458b569-ed67-43a7-9910-f0d76924261b:
     name: 'Viola Craft'
